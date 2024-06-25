@@ -5,6 +5,7 @@ import bellIcon from "../../assets/bell_icon.svg";
 import profileImage from "../../assets/profile_img.png";
 import caretIcon from "../../assets/caret_icon.svg";
 import { useEffect, useRef } from "react";
+import { logout } from "../../firebase";
 
 const Navbar = () => {
   const navRef = useRef();
@@ -40,7 +41,7 @@ const Navbar = () => {
           <img src={profileImage} alt="" className="profile" />
           <img src={caretIcon} alt="" />
           <div className="dropdown">
-            <p>Sign Out of Neoflick</p>
+            <p onClick={() => logout()}>Sign Out of Neoflick</p>
           </div>
         </div>
       </div>
