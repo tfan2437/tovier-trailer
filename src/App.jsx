@@ -6,6 +6,9 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { auth } from "./firebase";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const App = () => {
   const navigate = useNavigate();
 
@@ -22,12 +25,15 @@ const App = () => {
   }, []);
 
   return (
-    <Routes>
-      <Route index element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/player/:id" element={<Player />} />
-      <Route path="*" element={<h1>404 Not Found</h1>} />
-    </Routes>
+    <div>
+      <ToastContainer theme="dark" />
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/player/:id" element={<Player />} />
+        <Route path="*" element={<h1>404 Not Found</h1>} />
+      </Routes>
+    </div>
   );
 };
 
