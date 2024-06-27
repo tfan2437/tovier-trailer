@@ -2,11 +2,11 @@
   height: 100vh;
   background-image: linear-gradient(#0000007e, #0000007e),
     url(/netflix-landing-background.jpg);
-  padding: 20px 8%;
+  padding: 20px 18%;
 }
 
 .login-logo {
-  width: 150px;
+  width: 160px;
 }
 
 .login-form {
@@ -47,19 +47,71 @@
   font-weight: 500;
 }
 
-.login-form button {
+/* sign in button */
+
+.signin-btn {
   width: 100%;
+  padding: 16px;
+  margin-top: 20px;
+
   border: 0;
   outline: 0;
-  padding: 16px;
+  border-radius: 4px;
+
+  font-weight: 600;
+  font-size: 16px;
+
   background: #e50914;
   color: #ffffff;
-  border-radius: 4px;
-  font-size: 16px;
-  font-weight: 500;
-  margin-top: 20px;
   cursor: pointer;
 }
+
+.signin-btn:hover {
+  background-color: #b81d24;
+}
+
+/* Google sign in button */
+
+.or {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0px;
+}
+
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  padding: 16px;
+  margin-top: 20px;
+
+  border: 0;
+  outline: 0;
+  border-radius: 4px;
+
+  font-weight: 600;
+  font-size: 16px;
+
+  background-color: #ffffff;
+  color: #4285f4;
+  cursor: pointer;
+
+  transition: background-color 0.3s;
+}
+
+.google-btn img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.google-btn:hover {
+  background-color: #bbbbbb;
+}
+
+/* help form */
 
 .form-help {
   display: flex;
@@ -74,6 +126,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  margin-top: 10px;
 }
 .remember input {
   width: 18px;
@@ -81,7 +134,7 @@
 }
 
 .form-switch {
-  margin-top: 40px;
+  margin-top: 25px;
   color: #737373;
 }
 
@@ -101,7 +154,7 @@
   justify-content: center;
 }
 .login-spinner img {
-  width: 60px;
+  width: 150px;
 }
 
 /* Responsive Styling */

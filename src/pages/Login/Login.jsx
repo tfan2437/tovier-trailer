@@ -1,17 +1,21 @@
 import "./Login.css";
-import logo from "../../assets/neoflick-logo.png";
-import { useState } from "react";
-import { signup, login } from "../../firebase";
+import neoflickLogo from "../../assets/neoflick-logo.png";
+import googleG from "../../assets/google-g.png";
 import spinner from "../../assets/netflix_spinner.gif";
+import { useState } from "react";
+
+// Firebase
+import { signup, login, loginWithGoogle } from "../../firebase";
 
 const Login = () => {
   const [signState, setSignState] = useState("Sign In");
+  const [loading, setLoading] = useState(false);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  const userAuth = async (e) => {
+  const handleAuth = async (e) => {
     e.preventDefault();
     setLoading(true);
 
@@ -23,13 +27,22 @@ const Login = () => {
     setLoading(false);
   };
 
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    await loginWithGoogle();
+
+    setLoading(false);
+  };
+
   return loading ? (
     <div className="login-spinner">
-      <img src={spinner} alt="" />
+      <img src={spinner} alt="loading spinner" />
     </div>
   ) : (
     <div className="login">
-      <img src={logo} alt="" className="login-logo" />
+      <img src={neoflickLogo} alt="" className="login-logo" />
       <div className="login-form">
         <h1>{signState}</h1>
         <form>
@@ -53,13 +66,23 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button onClick={userAuth} type="submit">
+
+          <button type="submit" className="signin-btn" onClick={handleAuth}>
             {signState}
           </button>
+          <div className="or">
+            <p>OR</p>
+          </div>
+
+          <button className="google-btn" onClick={handleGoogleSignIn}>
+            <img src={googleG} alt="" />
+            Sign in with Google
+          </button>
+
           <div className="form-help">
             <div className="remember">
               <input type="checkbox" />
-              <label htmlFor="">Remember Me</label>
+              <label>Remember Me</label>
             </div>
             <p>Need Help?</p>
           </div>
@@ -67,7 +90,7 @@ const Login = () => {
         <div className="form-switch">
           {signState === "Sign Up" ? (
             <p>
-              Already have account?{" "}
+              Already have an account?{" "}
               <span onClick={() => setSignState("Sign In")}>Sign In Now</span>
             </p>
           ) : (

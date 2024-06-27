@@ -1,8 +1,10 @@
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
+  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
 } from "firebase/auth";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
@@ -19,7 +21,10 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 const db = getFirestore(app);
+
+// Authentication Function
 
 const signup = async (name, email, password) => {
   try {
@@ -31,6 +36,8 @@ const signup = async (name, email, password) => {
       name,
       authProvider: "local",
       email,
+      profileImage:
+        "https://live.staticflickr.com/65535/53818372241_08c548fb4b_s.jpg",
     });
   } catch (error) {
     console.error(error);
@@ -49,8 +56,26 @@ const login = async (email, password) => {
   }
 };
 
+const loginWithGoogle = async () => {
+  try {
+    const respose = await signInWithPopup(auth, provider);
+    const user = respose.user;
+
+    await addDoc(collection(db, "user"), {
+      uid: user.uid,
+      name: user.displayName,
+      authProvider: "google",
+      email: user.email,
+      profileImage: user.photoURL,
+    });
+  } catch (error) {
+    console.error(error);
+    toast.error(error.code.split("/")[1].split("-").join(" "));
+  }
+};
+
 const logout = () => {
   signOut(auth);
 };
 
-export { auth, db, signup, login, logout };
+export { auth, db, signup, login, loginWithGoogle, logout };
