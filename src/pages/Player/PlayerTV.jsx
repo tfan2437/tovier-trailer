@@ -1,17 +1,18 @@
 import "./Player.css";
 import backArrowIcon from "../../assets/back_arrow_icon.png";
 import { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const Player = () => {
+const PlayerTV = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   const [apiData, setApiData] = useState({
     name: "",
     key: "",
     published_at: "",
     type: "",
   });
-
-  const { id } = useParams();
 
   const options = {
     method: "GET",
@@ -23,8 +24,9 @@ const Player = () => {
   };
 
   useEffect(() => {
+    // TV Videos
     fetch(
-      `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`,
+      `https://api.themoviedb.org/3/tv/${id}/videos?language=en-US`,
       options
     )
       .then((response) => response.json())
@@ -32,16 +34,15 @@ const Player = () => {
       .catch((err) => console.error(err));
   }, []);
 
-  // const handleNextTrailer = () => {
-  //   if(trailerIndex)
-  // };
-
   return (
     <div className="player">
-      <NavLink to={"/"}>
-        <img src={backArrowIcon} alt="" />
-      </NavLink>
-
+      <img
+        src={backArrowIcon}
+        alt=""
+        onClick={() => {
+          navigate(-1);
+        }}
+      />
       <iframe
         width="90%"
         height="90%"
@@ -59,4 +60,4 @@ const Player = () => {
   );
 };
 
-export default Player;
+export default PlayerTV;

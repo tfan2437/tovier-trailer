@@ -20,21 +20,21 @@ const TitleCards = ({ title, category }) => {
     headers: {
       accept: "application/json",
       Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YTBhMDUxY2MyYzk3NzViMTZhMDcxM2Y3YTE4MzhjMCIsIm5iZiI6MTcxOTI3OTEzNy41MjYwNDMsInN1YiI6IjY2NzkwMTBhMmRiYzYzOWYxNmY0MGRmOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WixP3PpUoD7TRB4lFWOGYtPCHeMtjnoGhyS2Uv328iQ",
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YTBhMDUxY2MyYzk3NzViMTZhMDcxM2Y3YTE4MzhjMCIsIm5iZiI6MTcxOTQ1ODM2Ny4wNDQ0MzgsInN1YiI6IjY2NzkwMTBhMmRiYzYzOWYxNmY0MGRmOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.SgruefkV0ZXKU5KenZisAJMhyT1Hs1Htb-ICEYKrjoM",
     },
   };
 
-  // TMDB API Category: Movie Lists
+  // TMDB API Category: Trending / TV
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${
-        category ? category : "now_playing"
-      }?language=en-US&page=1`,
+      "https://api.themoviedb.org/3/trending/tv/day?language=en-US",
       options
     )
       .then((response) => response.json())
       .then((response) => setApiData(response.results))
       .catch((err) => console.error(err));
+
+    // Horizontal Scroll
 
     cardsRef.current.addEventListener("wheel", handleWheel);
   }, []);
@@ -44,12 +44,12 @@ const TitleCards = ({ title, category }) => {
       <h2>{title ? title : "Popular on Neoflick"}</h2>
       <div className="card-list" ref={cardsRef}>
         {apiData.map((card, index) => (
-          <Link to={`/player/${card.id}`} className="card" key={index}>
+          <Link to={`/playertv/${card.id}`} className="card" key={index}>
             <img
-              src={`https://image.tmdb.org/t/p/w500` + card.poster_path}
+              src={`https://image.tmdb.org/t/p/w500` + card.backdrop_path}
               alt=""
             />
-            <p>{card.original_title}</p>
+            <p>{card.original_name}</p>
           </Link>
         ))}
       </div>

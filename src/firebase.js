@@ -31,7 +31,7 @@ const signup = async (name, email, password) => {
     const respose = await createUserWithEmailAndPassword(auth, email, password);
     const user = respose.user;
 
-    await addDoc(collection(db, "user"), {
+    await addDoc(collection(db, "users"), {
       uid: user.uid,
       name,
       authProvider: "local",
@@ -61,7 +61,7 @@ const loginWithGoogle = async () => {
     const respose = await signInWithPopup(auth, provider);
     const user = respose.user;
 
-    await addDoc(collection(db, "user"), {
+    await addDoc(collection(db, "users"), {
       uid: user.uid,
       name: user.displayName,
       authProvider: "google",
