@@ -8,6 +8,7 @@ import TitleCards from "../../components/TitleCards/TitleCards";
 import TitleCardsTV from "../../components/TitleCards/TitleCardsTV";
 
 import Footer from "../../components/Footer/Footer";
+import MovieCards from "../../components/CardSlider/MovieCards";
 
 const Home = () => {
   return (
@@ -32,17 +33,18 @@ const Home = () => {
               More Info
             </button>
           </div>
-          <TitleCards className="title-cards" />
+          {/* <TitleCards className="title-cards" /> */}
         </div>
       </div>
 
       <div className="more-cards">
-        <TitleCards title={"Blockbuster Movies"} category={"now_playing"} />
+        {/* <TitleCards title={"Blockbuster Movies"} category={"now_playing"} />
         <TitleCards title={"Only on Netflix"} category={"popular"} />
         <TitleCards title={"Upcoming"} category={"top_rated"} />
         <TitleCards title={"Top Pick for You"} category={"upcoming"} />
-        <TitleCardsTV />
+        <TitleCardsTV /> */}
       </div>
+      <MovieCards />
       <Footer />
     </div>
   );
