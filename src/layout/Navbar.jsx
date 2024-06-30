@@ -90,7 +90,7 @@ const Navbar = () => {
             />
             <input
               type="text"
-              placeholder="Search: In Development"
+              placeholder="Search"
               className={`search-bar-input ${showSearch ? "" : "hidden"}`}
               onKeyPress={(e) => handleRedirect(e)}
             />

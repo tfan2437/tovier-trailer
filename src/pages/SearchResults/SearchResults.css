@@ -1,0 +1,139 @@
+.results-container {
+  width: 100%;
+  min-height: 78vh;
+  padding: 130px 6% 100px 6%;
+}
+
+/* Search Keyword Title */
+
+.results-title {
+  font-family: "Druk-Wide-Bold";
+  font-size: 16px;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+.results-title span {
+  color: #fff;
+}
+
+/* Cards Grid Layout */
+.results-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 1200px) {
+  .results-cards {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(25%, 1fr)
+    ); /* 4 cards per row on medium screens */
+  }
+}
+
+@media (max-width: 900px) {
+  .results-cards {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(33.33%, 1fr)
+    ); /* 3 cards per row on smaller screens */
+  }
+}
+
+@media (max-width: 600px) {
+  .results-cards {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(50%, 1fr)
+    ); /* 2 cards per row on mobile screens */
+  }
+}
+
+@media (max-width: 400px) {
+  .results-cards {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(100%, 1fr)
+    ); /* 1 card per row on very small screens */
+  }
+}
+
+/* Result Card */
+
+.results-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+  position: relative;
+}
+
+.results-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Info Hover and Show */
+
+.results-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px 10px 10px 10px;
+  text-decoration: none;
+
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.results-info:hover {
+  opacity: 1;
+}
+
+.results-rate-year {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.results-rate-year span {
+  font-family: "SF-Pro-Display";
+
+  font-size: 14px;
+  font-weight: 600;
+  padding: 3px 5px;
+
+  text-align: center;
+  color: #fff;
+  border-radius: 3px;
+  background: linear-gradient(to right, #6a11cb, #2674fc);
+}
+
+.results-rate-year p:last-child {
+  color: #aaa;
+  font-family: "SF-Pro-Display";
+  font-weight: 500;
+  padding-right: 4px;
+}
+
+.results-movie-name {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+
+  font-family: "Druk-Wide-Bold";
+  font-size: 14px;
+  color: #fff;
+}

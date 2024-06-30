@@ -1,6 +1,6 @@
 .navbar {
   width: 100%;
-  padding: 20px 6% 200px 6%;
+  padding: 20px 6% 100px 6%;
 
   display: flex;
   justify-content: space-between;
@@ -97,7 +97,7 @@
   font-size: 14px;
   color: #cccccc;
 
-  width: 150px;
+  width: 120px;
   opacity: 1;
   transition: width 0.2s ease-out, opacity 0.2s ease-out;
 }

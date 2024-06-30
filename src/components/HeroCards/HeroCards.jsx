@@ -3,8 +3,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import arrowLeft from "../../assets/icon-arrow-left.png";
 import arrowRight from "../../assets/icon-arrow-right.png";
-import playIcon from "../../assets/play_icon.png";
-import infoIcon from "../../assets/info_icon.png";
+import playIcon from "../../assets/icon-play.png";
+import infoIcon from "../../assets/icon-info.png";
 import { NavLink } from "react-router-dom";
 
 import "./HeroCards.css";
@@ -100,7 +100,7 @@ const HeroCards = ({ title, category }) => {
                   </button>
                   <button className="btn dark-btn">
                     <img src={infoIcon} alt="" />
-                    More Info
+                    Info
                   </button>
                 </NavLink>
               </section>

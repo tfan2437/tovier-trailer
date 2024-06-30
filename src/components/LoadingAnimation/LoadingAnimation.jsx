@@ -1,8 +1,8 @@
 import "./LoadingAnimation.css";
 
-const LoadingAnimation = () => {
+const LoadingAnimation = ({ height }) => {
   return (
-    <div className="animation-container">
+    <div className="animation-container" style={{ height: height }}>
       <div className="animation-wrapper">
         <ul className="animation-list">
           {Array.from({ length: 25 }, (_, i) => (

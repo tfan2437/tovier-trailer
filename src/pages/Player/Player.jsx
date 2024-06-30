@@ -1,9 +1,13 @@
 import "./Player.css";
 import backArrowIcon from "../../assets/back_arrow_icon.png";
 import { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { options } from "../../data/tmdbFetch";
+import LoadingAnimation from "../../components/LoadingAnimation/LoadingAnimation";
 
 const Player = () => {
+  const navigate = useNavigate();
+
   const [apiData, setApiData] = useState({
     name: "",
     key: "",
@@ -12,15 +16,6 @@ const Player = () => {
   });
 
   const { id } = useParams();
-
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YTBhMDUxY2MyYzk3NzViMTZhMDcxM2Y3YTE4MzhjMCIsIm5iZiI6MTcxOTI3OTEzNy41MjYwNDMsInN1YiI6IjY2NzkwMTBhMmRiYzYzOWYxNmY0MGRmOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WixP3PpUoD7TRB4lFWOGYtPCHeMtjnoGhyS2Uv328iQ",
-    },
-  };
 
   useEffect(() => {
     fetch(
@@ -32,30 +27,53 @@ const Player = () => {
       .catch((err) => console.error(err));
   }, []);
 
-  // const handleNextTrailer = () => {
-  //   if(trailerIndex)
-  // };
-
   return (
-    <div className="player">
-      <NavLink to={"/"}>
-        <img src={backArrowIcon} alt="" />
-      </NavLink>
+    <>
+      {apiData?.key !== undefined ? (
+        <div className="player">
+          <NavLink to={"/"}>
+            <img src={backArrowIcon} alt="" />
+          </NavLink>
 
-      <iframe
-        width="90%"
-        height="90%"
-        src={`https://www.youtube.com/embed/${apiData.key}`}
-        title="trailer"
-        frameBorder="0"
-        allowFullScreen
-      ></iframe>
-      <div className="player-info">
-        <p>{apiData.published_at.slice(0, 10)}</p>
-        <p>{apiData.name}</p>
-        <p>{apiData.type}</p>
-      </div>
-    </div>
+          <iframe
+            width="90%"
+            height="90%"
+            src={`https://www.youtube.com/embed/${apiData.key}`}
+            title="trailer"
+            frameBorder="0"
+            allowFullScreen
+          ></iframe>
+          <div className="player-info">
+            <p>{apiData.published_at.slice(0, 10)}</p>
+            <p>{apiData.name}</p>
+            <p>{apiData.type}</p>
+          </div>
+        </div>
+      ) : (
+        <div
+          style={{
+            position: "relative",
+          }}
+        >
+          <h1
+            onClick={() => navigate("/")}
+            style={{
+              opacity: "0.3",
+              position: "absolute",
+              left: "50vw",
+              top: "50vh",
+              transform: "translate(-50%, -50%)",
+              fontFamily: "Druk-Wide-Bold",
+              zIndex: 20,
+              cursor: "pointer",
+            }}
+          >
+            No Related Video
+          </h1>
+          <LoadingAnimation height={"100vh"} />
+        </div>
+      )}
+    </>
   );
 };
 

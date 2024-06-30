@@ -8,8 +8,11 @@ import logo from "../../assets/tvoier-purple-logo.png";
 // Firebase
 import { signup, login, loginWithGoogle } from "../../firebase";
 import LoadingAnimation from "../../components/LoadingAnimation/LoadingAnimation";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [signState, setSignState] = useState("Sign In");
   const [loading, setLoading] = useState(false);
 
@@ -46,17 +49,20 @@ const Login = () => {
     >
       <h1
         style={{
-          width: "200px",
           opacity: "0.3",
           position: "absolute",
-          left: "45%",
-          top: "48%",
           fontFamily: "Druk-Wide-Bold",
+          left: "50vw",
+          top: "50vh",
+          transform: "translate(-50%, -50%)",
+          zIndex: 20,
+          cursor: "pointer",
         }}
+        onClick={() => navigate("/")}
       >
         TOVIER
       </h1>
-      <LoadingAnimation />
+      <LoadingAnimation height={"100vh"} />
     </div>
   ) : (
     <div className="login">
