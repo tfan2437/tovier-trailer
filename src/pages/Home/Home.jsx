@@ -17,8 +17,8 @@ const Home = () => {
     <div className="home">
       <Navbar />
       <HeroCards />
-      <MovieCards />
-      <MovieCards />
+      <MovieCards title={"Now Playing"} api={"now_playing"} />
+      <MovieCards title={"Upcoming"} api={"upcoming"} />
       <MovieCards />
       <MovieCards />
       <Footer />

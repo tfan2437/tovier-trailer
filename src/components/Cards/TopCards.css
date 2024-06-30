@@ -3,6 +3,11 @@
   margin: 20px auto;
 }
 
+/* Card Gap */
+.slick-slide > div {
+  margin: 0;
+}
+
 /* Card */
 
 .card-container {

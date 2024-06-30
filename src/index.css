@@ -59,3 +59,54 @@ body {
   color: #ffffff;
   font-family: "Poppins";
 }
+
+/* React Slick */
+.slick-slide > div {
+  margin: 0;
+}
+
+.slick-prev,
+.slick-next {
+  height: 40px;
+  width: 22px;
+
+  opacity: 0.3;
+  z-index: 1;
+
+  transition: width 0.2s ease-out, height 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+  height: 52px;
+  width: 28px;
+
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Arrow Position */
+.slick-next {
+  right: -35px !important;
+}
+
+.slick-prev {
+  left: -35px !important;
+}
+
+/* Dots */
+.slick-dots {
+  bottom: 8%;
+}
+
+.slick-dots li button:before {
+  font-size: 6px;
+  color: #999;
+  opacity: 1;
+}
+
+.slick-dots li.slick-active button:before {
+  font-size: 8px;
+  color: #fff;
+  opacity: 1;
+}

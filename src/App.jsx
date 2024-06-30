@@ -9,6 +9,7 @@ import { auth } from "./firebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PlayerTV from "./pages/Player/PlayerTV";
+import SearchResults from "./pages/SearchResults/SearchResults";
 
 const App = () => {
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ const App = () => {
       <Routes>
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/searchresults/:id" element={<SearchResults />} />
         <Route path="/player/:id" element={<Player />} />
         <Route path="/playertv/:id" element={<PlayerTV />} />
         <Route path="*" element={<h1>404 Not Found</h1>} />

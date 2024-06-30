@@ -1,9 +1,9 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./MovieCards.css";
+import "./TopCards.css";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { options } from "../../data/tmdbFetch";
@@ -11,7 +11,7 @@ import { options } from "../../data/tmdbFetch";
 import arrowLeft from "../../assets/icon-arrow-left.png";
 import arrowRight from "../../assets/icon-arrow-right.png";
 
-const MovieCards = ({ title, api }) => {
+const TopCards = ({ title, api }) => {
   const [apiData, setApiData] = useState([]);
 
   // useEffect(() => {
@@ -145,4 +145,4 @@ const MovieCards = ({ title, api }) => {
   );
 };
 
-export default MovieCards;
+export default TopCards;
