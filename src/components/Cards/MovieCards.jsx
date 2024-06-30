@@ -39,13 +39,69 @@ const MovieCards = ({ title, category }) => {
   };
 
   const settings = {
-    dots: true,
-    infinite: false,
+    dots: false,
+    infinite: true,
     speed: 1000,
     slidesToShow: 7,
     slidesToScroll: 7,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1800,
+        settings: {
+          slidesToShow: 6,
+          slidesToScroll: 6,
+          infinite: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 1600,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 5,
+          infinite: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          infinite: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 1000,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          infinite: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false,
+        },
+      },
+    ],
   };
 
   const [apiData, setApiData] = useState([]);
@@ -77,24 +133,24 @@ const MovieCards = ({ title, category }) => {
     <div className="slider-container">
       <Slider {...settings}>
         {apiData.map((card, index) => (
-          <Link
-            to={`/player/${card.id}`}
-            key={index}
-            className="card-container"
-            style={{ alignItems: "center", alignContent: "center" }}
-          >
-            <img
-              src={`https://image.tmdb.org/t/p/w500` + card.poster_path}
-              alt=""
-              style={{ height: "345px", width: "auto", margin: "auto" }}
-            />
-            <div className="card-info">
+          <Link to={`/player/${card.id}`} key={index}>
+            <div className="card-container">
               <img
-                src={`https://image.tmdb.org/t/p/w500` + card.backdrop_path}
+                src={`https://image.tmdb.org/t/p/w500` + card.poster_path}
                 alt=""
+                className="card-image"
               />
-              <h3 className="card-info-title">{card.original_title}</h3>
-              <p className="card-info-disc">{card.overview.slice(0, 100)}</p>
+              <div className="card-info">
+                <p className="card-info-rating">
+                  <span>{card.vote_average.toString().slice(0, 3)}</span>
+                </p>
+                <img
+                  src={`https://image.tmdb.org/t/p/w500` + card.backdrop_path}
+                  alt=""
+                />
+                <h3 className="card-info-title">{card.original_title}</h3>
+                <p className="card-info-disc">{card.overview.slice(0, 90)}</p>
+              </div>
             </div>
           </Link>
         ))}

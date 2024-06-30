@@ -7,43 +7,19 @@ import infoIcon from "../../assets/info_icon.png";
 import TitleCards from "../../components/TitleCards/TitleCards";
 import TitleCardsTV from "../../components/TitleCards/TitleCardsTV";
 
-import Footer from "../../components/Footer/Footer";
-import MovieCards from "../../components/CardSlider/MovieCards";
+import Footer from "../../layout/Footer";
+import MovieCards from "../../components/Cards/MovieCards";
+import LoadingAnimation from "../../components/LoadingAnimation/LoadingAnimation";
+import HeroCards from "../../components/HeroCards/HeroCards";
 
 const Home = () => {
   return (
     <div className="home">
       <Navbar />
-      <div className="hero">
-        <img src={heroBanner} alt="" className="banner-img" />
-        <div className="hero-caption">
-          <img src={heroTitle} alt="" className="caption-img" />
-          <p>
-            Discover his ties to a secret ancient order, a young man living in
-            modern Istanbul embarks on a quest to save the city from an immortal
-            enemy.
-          </p>
-          <div className="hero-btns">
-            <button className="btn">
-              <img src={playIcon} alt="" />
-              Play
-            </button>
-            <button className="btn dark-btn">
-              <img src={infoIcon} alt="" />
-              More Info
-            </button>
-          </div>
-          {/* <TitleCards className="title-cards" /> */}
-        </div>
-      </div>
-
-      <div className="more-cards">
-        {/* <TitleCards title={"Blockbuster Movies"} category={"now_playing"} />
-        <TitleCards title={"Only on Netflix"} category={"popular"} />
-        <TitleCards title={"Upcoming"} category={"top_rated"} />
-        <TitleCards title={"Top Pick for You"} category={"upcoming"} />
-        <TitleCardsTV /> */}
-      </div>
+      <HeroCards />
+      <MovieCards />
+      <MovieCards />
+      <MovieCards />
       <MovieCards />
       <Footer />
     </div>

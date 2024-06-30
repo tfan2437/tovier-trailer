@@ -39,14 +39,14 @@ const Navbar = () => {
       }
     });
 
-    // Navbar black background >= 400 in Y
-    window.addEventListener("scroll", () => {
-      if (window.scrollY >= 400) {
-        navRef.current.classList.add("nav-dark");
-      } else {
-        navRef.current.classList.remove("nav-dark");
-      }
-    });
+    // Navbar black background >= 450 in Y
+    // window.addEventListener("scroll", () => {
+    //   if (window.scrollY >= 450) {
+    //     navRef.current.classList.add("navbar-over-y450");
+    //   } else {
+    //     navRef.current.classList.remove("navbar-over-y450");
+    //   }
+    // });
 
     return () => unsubscribe();
   }, []);

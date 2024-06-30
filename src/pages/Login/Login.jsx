@@ -3,9 +3,11 @@ import neoflickLogo from "../../assets/neoflick-logo.png";
 import googleG from "../../assets/google-g.png";
 import spinner from "../../assets/netflix_spinner.gif";
 import { useState } from "react";
+import logo from "../../assets/tvoier-purple-logo.png";
 
 // Firebase
 import { signup, login, loginWithGoogle } from "../../firebase";
+import LoadingAnimation from "../../components/LoadingAnimation/LoadingAnimation";
 
 const Login = () => {
   const [signState, setSignState] = useState("Sign In");
@@ -37,8 +39,24 @@ const Login = () => {
   };
 
   return loading ? (
-    <div className="login-spinner">
-      <img src={spinner} alt="loading spinner" />
+    <div
+      style={{
+        position: "relative",
+      }}
+    >
+      <h1
+        style={{
+          width: "200px",
+          opacity: "0.3",
+          position: "absolute",
+          left: "45%",
+          top: "48%",
+          fontFamily: "Druk-Wide-Bold",
+        }}
+      >
+        TOVIER
+      </h1>
+      <LoadingAnimation />
     </div>
   ) : (
     <div className="login">

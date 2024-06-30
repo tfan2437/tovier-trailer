@@ -1,6 +1,6 @@
 .navbar {
   width: 100%;
-  padding: 20px 6%;
+  padding: 20px 6% 200px 6%;
 
   display: flex;
   justify-content: space-between;
@@ -11,14 +11,15 @@
   color: #e5e5e5;
 
   /* gradient background: top to bottom */
-  background-image: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.7) 10%,
-    transparent
-  );
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 10%, transparent);
 
   z-index: 1;
 }
+
+/* .navbar-over-y450 {
+  padding: 20px 6% 20px 6%;
+  background: #141414;
+} */
 
 /* navbar-left */
 
@@ -142,10 +143,6 @@
 
 .navbar-profile:hover .dropdown {
   display: block;
-}
-
-.nav-dark {
-  background: #141414;
 }
 
 /* Responsive Styling */
