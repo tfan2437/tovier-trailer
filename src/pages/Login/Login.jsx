@@ -1,14 +1,13 @@
 import "./Login.css";
-import neoflickLogo from "../../assets/neoflick-logo.png";
 import googleG from "../../assets/google-g.png";
-import spinner from "../../assets/netflix_spinner.gif";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import logo from "../../assets/tvoier-purple-logo.png";
 
 // Firebase
-import { signup, login, loginWithGoogle } from "../../firebase";
+import { signup, login, loginWithGoogle, auth } from "../../firebase";
 import LoadingAnimation from "../../components/LoadingAnimation/LoadingAnimation";
 import { useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -19,6 +18,15 @@ const Login = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        console.log("Logged In");
+        navigate("/");
+      }
+    });
+  }, []);
 
   const handleAuth = async (e) => {
     e.preventDefault();
@@ -66,7 +74,7 @@ const Login = () => {
     </div>
   ) : (
     <div className="login">
-      <img src={neoflickLogo} alt="" className="login-logo" />
+      <img src={logo} alt="" className="login-logo" />
       <div className="login-form">
         <h1>{signState}</h1>
         <form>
@@ -119,7 +127,7 @@ const Login = () => {
             </p>
           ) : (
             <p>
-              New to Neoflick?{" "}
+              New to Tovier?{" "}
               <span onClick={() => setSignState("Sign Up")}>Sign Up Now</span>
             </p>
           )}

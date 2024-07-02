@@ -10,16 +10,14 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PlayerTV from "./pages/Player/PlayerTV";
 import SearchResults from "./pages/SearchResults/SearchResults";
+import NotFound from "./pages/NotFound/NotFound";
 
 const App = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        console.log("Logged In");
-        navigate("/");
-      } else {
+      if (!user) {
         console.log("Logged Out");
         navigate("/login");
       }
@@ -35,7 +33,7 @@ const App = () => {
         <Route path="/searchresults/:id" element={<SearchResults />} />
         <Route path="/player/:id" element={<Player />} />
         <Route path="/playertv/:id" element={<PlayerTV />} />
-        <Route path="*" element={<h1>404 Not Found</h1>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

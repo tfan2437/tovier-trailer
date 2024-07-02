@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
 
-  position: fixed; /* fixed on top */
+  position: fixed;
 
   font-size: 14px;
   color: #e5e5e5;
@@ -175,33 +175,15 @@
 }
 
 /* Responsive Styling */
-@media (max-width: 800px) {
-  .navbar {
-    padding: 20px 4%;
-  }
-
+@media (max-width: 1100px) {
   .navbar-left ul {
     display: none;
-  }
-
-  .navbar img {
-    height: 25px;
   }
 
   .navbar-right .profile {
     width: 25px;
     height: 25px;
     border-radius: 4px;
-  }
-}
-
-@media (max-width: 500px) {
-  .navbar img {
-    height: 20px;
-  }
-
-  .navbar-right {
-    gap: 10px;
   }
 }
 

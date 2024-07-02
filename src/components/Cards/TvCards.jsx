@@ -5,14 +5,14 @@ import NextArrow from "../CardSlider/NextArrow";
 import PrevArrow from "../CardSlider/PrevArrow";
 import { posterSetting } from "./slickSetting";
 
-import "./MovieCards.css";
+import "./TvCards.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { trimShortDesc } from "../../data/methods";
-import { movieListFetch } from "../../data/tmdbFetch";
+import { tvListFetch } from "../../data/tmdbFetch";
 
-const MovieCards = ({ title, api }) => {
-  const [moviesData, setMoviesData] = useState([]);
+const TvCards = ({ title, api }) => {
+  const [tvData, setTvData] = useState([]);
 
   const settings = {
     ...posterSetting,
@@ -22,8 +22,8 @@ const MovieCards = ({ title, api }) => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const moviesData = await movieListFetch(api);
-      setMoviesData(moviesData);
+      const tvData = await tvListFetch(api);
+      setTvData(tvData);
     };
 
     fetchMovies();
@@ -33,26 +33,20 @@ const MovieCards = ({ title, api }) => {
     <div className="slider-container">
       <p className="cards-list-title">{title ? title : "Movie List"}</p>
       <Slider {...settings}>
-        {moviesData.map((card, index) => (
-          <Link to={`/player/${card.id}`} key={index}>
-            <div className="card-container">
+        {tvData.map((card, index) => (
+          <Link to={`/playertv/${card.id}`} key={index}>
+            <div className="tv-card-container">
               <img
-                src={`https://image.tmdb.org/t/p/w500` + card.poster_path}
+                src={`https://image.tmdb.org/t/p/w500` + card.backdrop_path}
                 alt=""
-                className="card-image"
+                className="tv-card-image"
+                style={{ width: "230px", height: "129px" }}
               />
-              <div className="card-info">
-                <p className="card-info-rating">
+              <div className="tv-card-info">
+                <p className="tv-card-info-rating">
                   <span>{card.vote_average.toString().slice(0, 3)}</span>
                 </p>
-                <img
-                  src={`https://image.tmdb.org/t/p/w500` + card.backdrop_path}
-                  alt=""
-                />
-                <h3 className="card-info-title">{card.original_title}</h3>
-                <p className="card-info-disc">
-                  {trimShortDesc(card.overview, 100)}
-                </p>
+                <h3 className="tv-card-info-title">{card.original_name}</h3>
               </div>
             </div>
           </Link>
@@ -62,4 +56,4 @@ const MovieCards = ({ title, api }) => {
   );
 };
 
-export default MovieCards;
+export default TvCards;

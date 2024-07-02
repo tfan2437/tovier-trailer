@@ -11,11 +11,12 @@ import { onAuthStateChanged } from "firebase/auth";
 import { collection, query, where, getDocs } from "firebase/firestore";
 
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const navRef = useRef();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [user, setUser] = useState(null);
   const [username, setUsername] = useState("user");
@@ -45,15 +46,6 @@ const Navbar = () => {
       }
     });
 
-    // Navbar black background >= 450 in Y
-    // window.addEventListener("scroll", () => {
-    //   if (window.scrollY >= 450) {
-    //     navRef.current.classList.add("navbar-over-y450");
-    //   } else {
-    //     navRef.current.classList.remove("navbar-over-y450");
-    //   }
-    // });
-
     return () => unsubscribe();
   }, []);
 
@@ -64,25 +56,39 @@ const Navbar = () => {
     }
   };
 
+  const scrollToSection = (id) => {
+    navigate(`/`);
+    setTimeout(() => {
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
+  };
+
   return (
     <div className="navbar-container">
       <div ref={navRef} className="navbar">
         <div className="navbar-left">
-          <img src={logo} alt="" className="logo" />
-          <ul>
-            <li>Home</li>
-            <li>TV Shows</li>
-            <li>Movies</li>
-            <li>New & Popular</li>
-            <li>My List</li>
-            <li>Browse by Languages</li>
-          </ul>
+          <NavLink to={"/"}>
+            <img src={logo} alt="logo" className="logo" />
+          </NavLink>
+          {location.pathname === "/" && (
+            <ul>
+              <li onClick={() => scrollToSection("home")}>Home</li>
+              <li onClick={() => scrollToSection("movies")}>Movies</li>
+              <li onClick={() => scrollToSection("movies")}>Now Playing</li>
+              <li onClick={() => scrollToSection("now-playing")}>Classic</li>
+              <li onClick={() => scrollToSection("classic")}>Series</li>
+              <li onClick={() => scrollToSection("tv-Series")}>Trending</li>
+            </ul>
+          )}
         </div>
         <div className="navbar-right">
           <div className="search-bar">
             <img
               src={searchIcon}
-              alt=""
+              alt="search icon"
               className="icons"
               onClick={() => {
                 setShowSearch(!showSearch);
@@ -98,23 +104,22 @@ const Navbar = () => {
           <div className="notification" style={{ marginRight: "10px" }}>
             <img
               src={notiIcon}
-              alt=""
+              alt="notification icon"
               className="icons"
               style={{ padding: "4px 0 0 0" }}
             />
             <p className="notification-message">No message</p>
           </div>
-
           <div className="navbar-profile">
             <img
               src={
                 userImage ||
                 "https://live.staticflickr.com/65535/53818372241_08c548fb4b_s.jpg"
               }
-              alt="user profile image"
+              alt="user profile"
               className="profile"
             />
-            <img src={caretIcon} alt="" />
+            <img src={caretIcon} alt="caret icon" />
             <div className="dropdown">
               <p
                 style={{
@@ -129,7 +134,7 @@ const Navbar = () => {
                 {userEmail || "user@gmail.com"}
               </p>
               <p style={{ color: "#888888" }}>
-                Provider: {userProvider || "unknow"}
+                Provider: {userProvider || "unknown"}
               </p>
               <p
                 onClick={() => logout()}

@@ -39,6 +39,7 @@ const SearchResults = () => {
       const tvPage1 = await searchTvByPage(1);
 
       setSearchResults([...moviesPage1, ...moviesPage2, ...tvPage1]);
+      setSearchResults((prev) => prev.filter((result) => result.backdrop_path));
       setIsLoading(false);
     } catch (err) {
       console.error(err);
@@ -62,55 +63,74 @@ const SearchResults = () => {
         <h2 className="results-title">
           Results of " <span>{id.toUpperCase()}</span> "
         </h2>
-        {isLoading ? (
-          <LoadingAnimation height={"45vh"} />
+        {isLoading || searchResults.length === 0 ? (
+          <div
+            style={{
+              position: "relative",
+            }}
+          >
+            <h1
+              style={{
+                opacity: "0.3",
+                position: "absolute",
+                fontFamily: "Druk-Wide-Bold",
+                left: "50%",
+                top: "25vh",
+                transform: "translate(-50%, -50%)",
+                zIndex: 20,
+                cursor: "pointer",
+              }}
+              onClick={() => navigate("/")}
+            >
+              No Result
+            </h1>
+            <LoadingAnimation height={"50vh"} />
+          </div>
         ) : (
           <div className="results-cards">
             {searchResults &&
-              searchResults
-                .filter((result) => result.backdrop_path) // Filter out items with null backdrop_path
-                .map((result, index) => (
-                  <div key={index} className="results-card">
-                    <Link>
-                      <img
-                        src={`https://image.tmdb.org/t/p/original/${result.backdrop_path}`}
-                        alt={result.original_title}
-                        className="results-card-image"
-                      />
-                    </Link>
-                    <Link
-                      to={
-                        result.original_title
-                          ? `/player/${result.id}`
-                          : `/playertv/${result.id}`
-                      }
-                      className="results-info"
-                    >
-                      <div className="results-rate-year">
-                        <p>
-                          <span>
-                            {result.vote_average === null
-                              ? "0.0"
-                              : result.vote_average.toString().slice(0, 3)}
-                          </span>
-                        </p>
-                        <p>
-                          {result.release_date
-                            ? result.release_date.slice(0, 4)
-                            : ""}
-                          {result.first_air_date
-                            ? result.first_air_date.slice(0, 4)
-                            : ""}
-                        </p>
-                      </div>
-                      <p className="results-movie-name">
-                        {result.original_title
-                          ? result.original_title
-                          : result.original_name}
+              searchResults.map((result, index) => (
+                <div key={index} className="results-card">
+                  <Link>
+                    <img
+                      src={`https://image.tmdb.org/t/p/original/${result.backdrop_path}`}
+                      alt={result.original_title}
+                      className="results-card-image"
+                    />
+                  </Link>
+                  <Link
+                    to={
+                      result.original_title
+                        ? `/player/${result.id}`
+                        : `/playertv/${result.id}`
+                    }
+                    className="results-info"
+                  >
+                    <div className="results-rate-year">
+                      <p>
+                        <span>
+                          {result.vote_average === null
+                            ? "0.0"
+                            : result.vote_average.toString().slice(0, 3)}
+                        </span>
                       </p>
-                    </Link>
-                  </div>
-                ))}
+                      <p>
+                        {result.release_date
+                          ? result.release_date.slice(0, 4)
+                          : ""}
+                        {result.first_air_date
+                          ? result.first_air_date.slice(0, 4)
+                          : ""}
+                      </p>
+                    </div>
+                    <p className="results-movie-name">
+                      {result.original_title
+                        ? result.original_title
+                        : result.original_name}
+                    </p>
+                  </Link>
+                </div>
+              ))}
           </div>
         )}
       </div>

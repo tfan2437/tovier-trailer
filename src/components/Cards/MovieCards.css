@@ -1,13 +1,22 @@
 .slider-container {
   width: 90%;
-  margin: 20px auto;
+  margin: 10px auto 30px auto;
+}
+
+/* Title */
+
+.cards-list-title {
+  font-family: "Druk-Wide-Bold";
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 15px;
 }
 
 /* Card */
 
 .card-container {
   width: 230px;
-  margin: 40px auto;
+  margin: 0px auto;
   position: relative;
 }
 
