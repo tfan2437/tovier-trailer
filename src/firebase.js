@@ -50,7 +50,7 @@ const signUp = async (name, email, password) => {
       email: email,
       authProvider: "Tovier",
       profileImage:
-        "https://live.staticflickr.com/65535/53875123869_a98d6e8b99_m.jpg",
+        "https://live.staticflickr.com/65535/53877310476_44a5125bd1_c.jpg",
     });
 
     console.log("Signed up successfully! User: " + user.displayName);
