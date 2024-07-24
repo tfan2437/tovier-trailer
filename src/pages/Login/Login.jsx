@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import logo from "../../assets/tvoier-purple-logo.png";
 
 // Firebase
-import { signup, login, loginWithGoogle, auth } from "../../firebase";
+import { auth, signUp, login, loginWithGoogle } from "../../firebase";
 import LoadingAnimation from "../../components/LoadingAnimation/LoadingAnimation";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
@@ -35,7 +35,7 @@ const Login = () => {
     if (signState === "Sign In") {
       await login(email, password);
     } else {
-      await signup(name, email, password);
+      await signUp(name, email, password);
     }
     setLoading(false);
   };

@@ -8,41 +8,29 @@ import caretIcon from "../assets/caret_icon.svg";
 // Firebase
 import { logout, auth, db } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
+import { assets } from "../assets/assets";
 
 const Navbar = () => {
   const navRef = useRef();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [user, setUser] = useState(null);
-  const [username, setUsername] = useState("user");
-  const [userImage, setUserImage] = useState("");
-  const [userProvider, setUserProvider] = useState("");
-  const [userEmail, setUserEmail] = useState("");
   const [showSearch, setShowSearch] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    // Query user information on database
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser) {
-        const q = query(
-          collection(db, "users"),
-          where("uid", "==", currentUser.uid)
-        );
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-          setUser(doc.data());
-          setUsername(doc.data().name);
-          setUserImage(doc.data().profileImage);
-          setUserProvider(doc.data().authProvider);
-          setUserEmail(doc.data().email);
-        });
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userRef);
+        const userData = userDoc.data();
+        setCurrentUser(userData);
       } else {
-        setUser(null);
+        navigate("/login");
       }
     });
 
@@ -112,10 +100,7 @@ const Navbar = () => {
           </div>
           <div className="navbar-profile">
             <img
-              src={
-                userImage ||
-                "https://live.staticflickr.com/65535/53818372241_08c548fb4b_s.jpg"
-              }
+              src={currentUser?.profileImage || assets.blackImage}
               alt="user profile"
               className="profile"
             />
@@ -128,13 +113,13 @@ const Navbar = () => {
                   color: "#888888",
                 }}
               >
-                {username || "User"}
+                {currentUser?.name || "User"}
               </p>
               <p style={{ color: "#888888" }}>
-                {userEmail || "user@gmail.com"}
+                {currentUser?.email || "user@gmail.com"}
               </p>
               <p style={{ color: "#888888" }}>
-                Provider: {userProvider || "unknown"}
+                {currentUser?.authProvider || "Tovier"}
               </p>
               <p
                 onClick={() => logout()}

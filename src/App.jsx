@@ -6,7 +6,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { auth } from "./firebase";
 
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PlayerTV from "./pages/Player/PlayerTV";
 import SearchResults from "./pages/SearchResults/SearchResults";
@@ -18,7 +18,6 @@ const App = () => {
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (!user) {
-        console.log("Logged Out");
         navigate("/login");
       }
     });
